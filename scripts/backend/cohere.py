@@ -1,8 +1,8 @@
 import os
-from cohere import Client
+import cohere 
 
 # Initialize a new CohereClient with an API key
-cohere = Client(os.environ.get('COHERE_API_KEY', ''))
+cohere = cohere.Client(os.environ.get('COHERE_API_KEY', ''))
 
 # Define commit templates
 commit_templates = [
