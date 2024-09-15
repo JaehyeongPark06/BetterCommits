@@ -29,7 +29,7 @@ try:
     userInput = "erm I added API"
     response = cohere_client.chat(
         model="command-r",
-        message="Please rephrase and make sure that the suggestion follows commit message structure and that it is concise. Keep the response to three sentences max. No need for the niceties." + userInput + userCodeChange,
+        message="send me back a one liner ONLY." + userInput + userCodeChange,
         documents=documents  # Pass the loaded JSON data as the documents input
     )
 
