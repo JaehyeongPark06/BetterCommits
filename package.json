@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "bettercommits.helloWorld",
-        "title": "Hello World"
+        "command": "commitMentor.displayMessage",
+        "title": "Display Cohere"
       }
     ]
   },

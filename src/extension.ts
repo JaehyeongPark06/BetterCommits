@@ -1,26 +1,45 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+// Import the vscode module, which provides the VS Code extensibility API
 import * as vscode from 'vscode';
+import * as fs from 'fs';
+import * as path from 'path';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+/**
+ * Activates the extension
+ * This function is called when your extension is activated
+ * It sets up command registrations and initializes the extension state
+ * @param context The extension context provided by VS Code
+ */
 export function activate(context: vscode.ExtensionContext) {
+  console.log('Commit Message Mentor extension is now active');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "bettercommits" is now active!');
+  // Register the command to display the message from data/user.txt
+  vscode.commands.registerCommand('commitMentor.displayMessage', () => {
+	try {
+      // Get the path to data/user.txt
+      const filePath = '/Users/shaurya/Development/HTN/BetterCommits/data/user.txt';
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('bettercommits.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from BetterCommits!');
-	});
+      // Read the contents of the file
+      const message = fs.readFileSync(filePath, 'utf8');
 
-	context.subscriptions.push(disposable);
+      // Display the message to the user
+      vscode.window.showInformationMessage(`Message from data/user.txt: ${message.trim()}`);
+    } catch (error) {
+      vscode.window.showErrorMessage(`Error reading message: ${error}`);
+    }
+  });
+
+  
+  
+
+  
+
+  // Add the command registration to the list of disposables
+  // This ensures the command is properly disposed when the extension is deactivated
 }
 
-// This method is called when your extension is deactivated
+/**
+ * Deactivates the extension
+ * This function is called when your extension is deactivated
+ * It's left empty as there are no cleanup tasks required for this extension
+ */
 export function deactivate() {}
