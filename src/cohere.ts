@@ -1,13 +1,5 @@
 // Import the vscode module, which provides the VS Code extensibility API
 import * as vscode from 'vscode';
-// Import the CohereClient from the cohere-ai package, which allows interaction with the Cohere API
-import { CohereClient } from 'cohere-ai';
-
-// Initialize a new CohereClient with an API key
-// The API key is fetched from an environment variable, or defaults to an empty string if not found
-const cohere = new CohereClient({
-  token: process.env.COHERE_API_KEY || '',
-});
 
 // Define an interface for commit templates
 // This interface specifies the structure for different commit message formats
@@ -115,25 +107,7 @@ export function activate(context: vscode.ExtensionContext) {
  * Analyzes a commit message using the Cohere API
  * This function sends the commit message to Cohere's AI model for analysis
  */
-async function analyzeCommitMessage(message: string): Promise<string> {
-  try {
-    // Retrieve custom feedback preferences from VS Code configuration
-    const feedbackPreferences = vscode.workspace.getConfiguration().get('commitMentor.feedbackPreferences', '');
-    
-    // Send a request to the Cohere API for analysis
-    // The request includes the commit message, current template, and custom preferences
-    const response = await cohere.chat({
-      model: "command",
-      message: `Analyze the following git commit message and provide feedback on its clarity, structure, and adherence to the ${currentTemplate.name} template (${currentTemplate.description}). Consider these custom preferences: ${feedbackPreferences}. The user's git commit message is:\n\n${message}\n\nFeedback:`,
-    });
 
-    console.log(response); // debug
-    return response.text.trim(); // Return the trimmed text of the response
-  } catch (error) {
-    console.error('Error analyzing commit message:', error);
-    return 'Error analyzing commit message. Please try again.';
-  }
-}
 
 /**
  * Analyzes a commit message in real-time and provides diagnostics
