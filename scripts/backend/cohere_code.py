@@ -1,5 +1,6 @@
 import os
 import cohere 
+import json
 
 # Initialize a new CohereClient with an API key
 cohere_client = cohere.Client(os.environ.get('COHERE_API_KEY', ''))
@@ -48,6 +49,8 @@ def get_commit_message():
 def main():
     commit_message = get_commit_message()
     analysis = analyze_commit_message(commit_message)
+    with open('data/commit_analysis.txt', 'w') as file:
+        file.write(analysis, file)
     print(f"Commit Analysis: {analysis}")
 
 if __name__ == "__main__":
