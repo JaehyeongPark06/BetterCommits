@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 import os
 import json
 
+# Import the get_commit_message function from cohere_code.py
+from cohere_code import get_commit_message
+
 # Load the .env file
 load_dotenv()
 cohere_api_key = os.getenv('COHERE_API_KEY')
@@ -25,12 +28,15 @@ except json.JSONDecodeError:
 
 # Send a message using Cohere's chat model
 try:
-    userCodeChange = "load_dotenv() cohere_api_key = os.getenv('COHERE_API_KEY')"
-    userInput = "erm I added API"
+    # Get the commit message to be used as userInput from cohere_code.py
+    userInput = get_commit_message()
+    
     response = cohere_client.chat(
         model="command-r",
-        message="send me back a one liner ONLY." + userInput + userCodeChange,
-        documents=documents  # Pass the loaded JSON data as the documents input
+        message="Your primary goal is to suggest a better commit message so that it is compliant with Angular Commit Format Structure in mind. This userInput '" + userInput + "' is to provide context. Keep the response short and concise in one line. Two lines max. Please just provide the commit message and no explanations.",
+        documents=documents,  # Pass the loaded JSON data as the documents input
+        max_tokens=300,
+        temperature=0.7
     )
 
     # Print the response

@@ -33,10 +33,17 @@ def analyze_commit_message(message: str) -> str:
         print(f'Error analyzing commit message: {error}')
         return 'Error analyzing commit message. Please try again.'
 
+# cohere_code.py
 def get_commit_message():
     # Read the git commit message from the COMMIT_EDITMSG file
-    with open('.git/COMMIT_EDITMSG', 'r') as file:
-        return file.read().strip()
+    try:
+        with open('.git/COMMIT_EDITMSG', 'r') as file:
+            return file.read().strip()
+    except FileNotFoundError:
+        raise FileNotFoundError("The COMMIT_EDITMSG file was not found.")
+    except Exception as e:
+        raise Exception(f"Error reading COMMIT_EDITMSG file: {e}")
+
 
 def main():
     commit_message = get_commit_message()
