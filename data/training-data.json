@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Commit Message Structure",
+        "snippet": "Commit message consists of header, body, and footer. Header is mandatory, body is required except for 'docs', footer is optional."
+    },
+    {
+        "title": "Header Format",
+        "snippet": "Format: <type>(<scope>): <short summary>. Type and summary are mandatory, scope is optional."
+    },
+    {
+        "title": "Types",
+        "snippet": "Commit types include: build, ci, docs, feat, fix, perf, refactor, test."
+    },
+    {
+        "title": "Scope",
+        "snippet": "Scope should represent the affected package, such as core, router. Special scopes include packaging, changelog, dev-infra, ngcc."
+    },
+    {
+        "title": "Summary",
+        "snippet": "The summary should be in imperative present tense, not capitalized, and without a period at the end."
+    },
+    {
+        "title": "Commit Body",
+        "snippet": "Explains the motivation for the change, using imperative present tense."
+    },
+    {
+        "title": "Commit Footer",
+        "snippet": "Footer can describe breaking changes, deprecations, and reference GitHub issues or PRs (e.g., Fixes #123)."
+    },
+    {
+        "title": "Revert Commits",
+        "snippet": "Revert commits start with 'revert: ' and reference the commit SHA being reverted, along with an explanation."
+    }
+]
